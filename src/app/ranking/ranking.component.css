@@ -1,0 +1,28 @@
+.mat-display-1,
+.mat-display-2 {
+  text-align: center;
+  margin: 1rem;
+  padding: 0;
+}
+
+.rankings {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+mat-spinner {
+  margin-bottom: 2rem;
+}
+
+table {
+  width: 90vw;
+}

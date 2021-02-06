@@ -1,0 +1,39 @@
+<mat-accordion>
+  <mat-expansion-panel class="tour-panel" *ngFor="let tour of tournaments; let i = index">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{tour.name}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-card class="tour-card">
+      <mat-card-header>
+        <mat-card-title>
+          {{tour.name}}
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{tour.city}}, {{tour.country}}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="tour-detail">
+          Start date: {{formatDate(tour.start_date)}}
+        </p>
+        <p class="tour-detail">
+          End date: {{formatDate(tour.end_date)}}
+        </p>
+        <p class="tour-detail">
+          Surface: {{tour.surface}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions class="tour-button">
+        <button mat-raised-button *ngIf="tour.showMatches !== true" (click)="toggleShowMatches(i)">Show Matches</button>
+        <button mat-raised-button *ngIf="tour.showMatches === true" (click)="toggleShowMatches(i)">Hide Matches</button>
+      </mat-card-actions>
+    </mat-card>
+    <!-- <div *ngIf="tour.showMatches === true">
+      <mat-card class="match" *ngFor="let match of matches">
+        {{match.home_player}} vs {{match.away_player}}
+      </mat-card>
+    </div> -->
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,75 @@
+<mat-toolbar color="primary" class="toolbar">
+  <button mat-button (click)="changeDate(dates[0])">
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
+  <span class="spacer"></span>
+  <div *ngFor="let date of dates" class="spacer md-date">
+    <button mat-raised-button (click)="getMatches(date)">
+      {{date}}
+    </button>
+  </div>
+  <div class="spacer sm-date">
+    <button mat-raised-button>
+      {{dates[1]}}
+    </button>
+  </div>
+  <button mat-button (click)="changeDate(dates[2])">
+    <mat-icon>arrow_forward_ios</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="content">
+  <mat-form-field appearance="outline" class="view">
+    <mat-label>Select View</mat-label>
+    <mat-select [(value)]="view">
+      <mat-option *ngFor="let view of views" [value]="view">
+        {{view}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <app-ranking *ngIf="view === 'Rankings'"></app-ranking>
+  <app-tournament *ngIf="view === 'Tournaments'"></app-tournament>
+  <div *ngIf="view === 'Matches'">
+    <h1 class="mat-display-1" *ngIf="results.length === 0">There's no result.</h1>
+    <div class="result" *ngFor="let result of results">
+      <div class="tournament">
+        <h1>
+          {{result.tournament.name}}
+        </h1>
+        <h3>
+          {{result.tournament.city}}, {{result.tournament.country}}
+        </h3>
+      </div>
+      <mat-card class="match" *ngFor="let match of result.matches">
+        <p class="match-time">
+          {{formatTime(match.date)}}
+        </p>
+        <p class="match-result" *ngIf="match.result === null">
+          <span class="player-name">{{match.home.full_name}}</span>
+          <span class="spacer"></span>
+        </p>
+        <p class="match-result" *ngIf="match.result === null">
+          <span class="player-name">{{match.away.full_name}}</span>
+          <span class="spacer"></span>
+        </p>
+        <p class="match-result" *ngIf="match.result">
+          <span class="player-name">{{match.home.full_name}}</span>
+          <span class="spacer"></span>
+          <span class="score" *ngIf="match.result.home_set1">{{match.result.home_set1}}<sup
+              *ngIf="match.result.home_tb1">{{match.result.home_tb1}}</sup></span>
+          <span class="score" *ngIf="match.result.home_set2">{{match.result.home_set2}}<sup
+              *ngIf="match.result.home_tb2">{{match.result.home_tb2}}</sup></span>
+        </p>
+        <p class="match-result" *ngIf="match.result">
+          <span class="player-name">{{match.away.full_name}}</span>
+          <span class="spacer"></span>
+          <span class="score" *ngIf="match.result.away_set1">{{match.result.away_set1}}<sup
+              *ngIf="match.result.away_tb1">{{match.result.away_tb1}}</sup></span>
+          <span class="score" *ngIf="match.result.away_set2">{{match.result.away_set2}}<sup
+              *ngIf="match.result.away_tb2">{{match.result.away_tb2}}</sup></span>
+        </p>
+      </mat-card>
+    </div>
+  </div>
+</div>

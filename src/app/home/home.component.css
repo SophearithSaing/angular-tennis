@@ -1,0 +1,66 @@
+@media (max-width: 500px) {
+  .md-date {
+    display: none;
+  }
+}
+
+@media (min-width: 500px) {
+  .sm-date {
+    display: none;
+  }
+}
+
+.content {
+  overflow: auto;
+  height: 90vh;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+h1 {
+  margin: 0;
+}
+
+sup {
+  vertical-align: baseline;
+  position: relative;
+  top: -0.4em;
+}
+
+.view {
+  margin: 1rem;
+  font-size: 1rem;
+}
+
+.mat-display-1 {
+  text-align: center;
+  margin: 10px;
+  padding: 0;
+}
+
+.result {
+  margin: 0 2rem 2rem;
+}
+
+.match {
+  margin-bottom: 1rem;
+}
+
+.match-time {
+  margin-left: 10px;
+  color: #777;
+}
+
+.match-result {
+  display: flex;
+}
+
+.player-name {
+  margin-left: 10px;
+}
+
+.score {
+  margin-right: 10px;
+}

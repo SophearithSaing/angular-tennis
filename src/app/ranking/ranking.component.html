@@ -1,0 +1,38 @@
+<h1 class="mat-display-2" *ngIf="!loading">Rankings</h1>
+
+<div *ngIf="loading" class="spinner">
+  <mat-spinner></mat-spinner>
+  <h1 class="mat-display-1">Getting Rankings</h1>
+</div>
+
+<div class="rankings">
+  <table mat-table [dataSource]="rankings" class="mat-elevation-z8" *ngIf="!loading">
+
+    <!-- Ranking Column -->
+    <ng-container matColumnDef="ranking">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let player"> {{player.ranking}} </td>
+    </ng-container>
+
+    <!-- Country Column -->
+    <ng-container matColumnDef="country">
+      <th mat-header-cell *matHeaderCellDef> Country </th>
+      <td mat-cell *matCellDef="let player"> {{player.country}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let player">{{player.full_name}}</td>
+    </ng-container>
+
+    <!-- Point Column -->
+    <ng-container matColumnDef="points">
+      <th mat-header-cell *matHeaderCellDef> Points </th>
+      <td mat-cell *matCellDef="let player">{{player.ranking_points}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
