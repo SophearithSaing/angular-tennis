@@ -18,18 +18,14 @@ export class HomeComponent implements OnInit {
     'Tournaments'
   ];
   view = 'Matches';
+  loading = false;
   results = [];
 
   constructor(private tennisService: TennisService) { }
 
   ngOnInit(): void {
     this.getDates(this.fullDate);
-    // this.getMatches(this.dates[1]);
-  }
-
-  selectView = (event: any) => {
-    console.log(event.value);
-    this.view = event.value;
+    this.getMatches(this.dates[1]);
   }
 
   getDates = (date: Date) => {
@@ -49,11 +45,13 @@ export class HomeComponent implements OnInit {
   }
 
   getMatches = (date: string) => {
+    this.loading = true;
+    this.selectedDate = date;
     const dateArr = date.split('-');
     const dateStr = `${dateArr[2]}-${dateArr[1]}-${dateArr[0]}`;
     this.tennisService.getMatchesByDate(dateStr).subscribe(data => {
-      console.log(data.results);
       this.results = data.results;
+      this.loading = false;
     });
   }
 

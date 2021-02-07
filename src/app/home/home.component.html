@@ -31,7 +31,12 @@
   <app-ranking *ngIf="view === 'Rankings'"></app-ranking>
   <app-tournament *ngIf="view === 'Tournaments'"></app-tournament>
   <div *ngIf="view === 'Matches'">
-    <h1 class="mat-display-1" *ngIf="results.length === 0">There's no result.</h1>
+    <h1 class="mat-display-1" *ngIf="results.length === 0 && !loading">There's no result.</h1>
+    <h1 class="mat-display-1" *ngIf="results.length > 0 && !loading">Matches for {{selectedDate}}</h1>
+    <div *ngIf="loading" class="spinner">
+      <mat-spinner></mat-spinner>
+      <h1 class="mat-display-1">Getting Matches</h1>
+    </div>
     <div class="result" *ngFor="let result of results">
       <div class="tournament">
         <h1>
