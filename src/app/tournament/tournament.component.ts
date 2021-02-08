@@ -8,13 +8,16 @@ import { TennisService } from '../tennis.service';
 })
 export class TournamentComponent implements OnInit {
 
+  loading = false;
   tournaments = [];
 
   constructor(private tennisService: TennisService) { }
 
   ngOnInit(): void {
+    this.loading = true;
     this.tennisService.getTournaments().subscribe(data => {
       this.tournaments = data.results;
+      this.loading = false;
     });
   }
 
@@ -27,6 +30,4 @@ export class TournamentComponent implements OnInit {
     const dateArr = date.split('-');
     return `${dateArr[2]}-${dateArr[1]}-${dateArr[0]}`;
   }
-
-
 }

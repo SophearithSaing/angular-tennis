@@ -25,17 +25,18 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDates(this.fullDate);
-    this.getMatches(this.dates[1]);
   }
 
   getDates = (date: Date) => {
     this.dates = [];
     let newDate = new Date(date.setDate(date.getDate() - 1));
     for (let round = 0; round < 3; round++) {
-      const dateString = `${newDate.getDate() < 9 ? '0' + (newDate.getDate()) : (newDate.getDate())}-${newDate.getMonth() < 9 ? '0' + (newDate.getMonth() + 1) : (newDate.getMonth() + 1)}-${newDate.getFullYear()}`;
+      const dateString = `${newDate.getDate() < 10 ? '0' + (newDate.getDate()) : (newDate.getDate())}-${newDate.getMonth() < 9 ? '0' + (newDate.getMonth() + 1) : (newDate.getMonth() + 1)}-${newDate.getFullYear()}`;
       this.dates.push(dateString);
       newDate = new Date(date.setDate(date.getDate() + 1));
     }
+    this.selectedDate = this.dates[1];
+    this.getMatches(this.dates[1]);
   }
 
   changeDate = (dateString: string) => {
@@ -45,6 +46,7 @@ export class HomeComponent implements OnInit {
   }
 
   getMatches = (date: string) => {
+    this.results = [];
     this.loading = true;
     this.selectedDate = date;
     const dateArr = date.split('-');
@@ -52,6 +54,7 @@ export class HomeComponent implements OnInit {
     this.tennisService.getMatchesByDate(dateStr).subscribe(data => {
       this.results = data.results;
       this.loading = false;
+      console.log(this.results);
     });
   }
 

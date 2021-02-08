@@ -64,12 +64,29 @@ mat-spinner {
   color: #777;
 }
 
+.match-notstarted {
+  color: #000;
+}
+
+.match-inprogress {
+  color: darkgoldenrod;
+}
+
+.match-finished {
+  color: darkgreen;
+}
+
 .match-result {
   display: flex;
 }
 
 .player-name {
   margin-left: 10px;
+}
+
+.match-winner {
+  margin-left: 10px;
+  color: green;
 }
 
 .score {

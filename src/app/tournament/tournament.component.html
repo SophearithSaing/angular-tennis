@@ -1,4 +1,9 @@
-<mat-accordion>
+<div *ngIf="loading" class="spinner">
+  <mat-spinner></mat-spinner>
+  <h1 class="mat-display-1">Getting Tournaments</h1>
+</div>
+
+<mat-accordion *ngIf="!loading">
   <mat-expansion-panel class="tour-panel" *ngFor="let tour of tournaments; let i = index">
     <mat-expansion-panel-header>
       <mat-panel-title>

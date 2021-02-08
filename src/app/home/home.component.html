@@ -31,7 +31,7 @@
   <app-ranking *ngIf="view === 'Rankings'"></app-ranking>
   <app-tournament *ngIf="view === 'Tournaments'"></app-tournament>
   <div *ngIf="view === 'Matches'">
-    <h1 class="mat-display-1" *ngIf="results.length === 0 && !loading">There's no result.</h1>
+    <h1 class="mat-display-1" *ngIf="results.length === 0 && !loading">There's no result for {{selectedDate}}</h1>
     <h1 class="mat-display-1" *ngIf="results.length > 0 && !loading">Matches for {{selectedDate}}</h1>
     <div *ngIf="loading" class="spinner">
       <mat-spinner></mat-spinner>
@@ -49,30 +49,29 @@
       <mat-card class="match" *ngFor="let match of result.matches">
         <p class="match-time">
           {{formatTime(match.date)}}
+          <span class="match-notstarted" *ngIf="match.status === 'notstarted'">Not Started</span>
+          <span class="match-inprogress" *ngIf="match.status === 'inprogress'">In Progress</span>
+          <span class="match-finished" *ngIf="match.status === 'finished'">Finished</span>
         </p>
-        <p class="match-result" *ngIf="match.result === null">
-          <span class="player-name">{{match.home.full_name}}</span>
+        <p class="match-result">
+          <span class="player-name">{{match.home_player}}</span><span class="match-winner"
+            *ngIf="match.status === 'finished' && match?.result?.winner_id === match?.home_id">Winner</span>
           <span class="spacer"></span>
+          <span class="score">{{match?.result?.home_set1}}<sup>{{match?.result?.home_tb1}}</sup></span>
+          <span class="score">{{match?.result?.home_set2}}<sup>{{match?.result?.home_tb2}}</sup></span>
+          <span class="score">{{match?.result?.home_set3}}<sup>{{match?.result?.home_tb3}}</sup></span>
+          <span class="score">{{match?.result?.home_set4}}<sup>{{match?.result?.home_tb4}}</sup></span>
+          <span class="score">{{match?.result?.home_set5}}<sup>{{match?.result?.home_tb5}}</sup></span>
         </p>
-        <p class="match-result" *ngIf="match.result === null">
-          <span class="player-name">{{match.away.full_name}}</span>
+        <p class="match-result">
+          <span class="player-name">{{match.away_player}}</span><span class="match-winner"
+            *ngIf="match.status === 'finished' && match?.result?.winner_id === match?.away_id">Winner</span>
           <span class="spacer"></span>
-        </p>
-        <p class="match-result" *ngIf="match.result">
-          <span class="player-name">{{match.home.full_name}}</span>
-          <span class="spacer"></span>
-          <span class="score" *ngIf="match.result.home_set1">{{match.result.home_set1}}<sup
-              *ngIf="match.result.home_tb1">{{match.result.home_tb1}}</sup></span>
-          <span class="score" *ngIf="match.result.home_set2">{{match.result.home_set2}}<sup
-              *ngIf="match.result.home_tb2">{{match.result.home_tb2}}</sup></span>
-        </p>
-        <p class="match-result" *ngIf="match.result">
-          <span class="player-name">{{match.away.full_name}}</span>
-          <span class="spacer"></span>
-          <span class="score" *ngIf="match.result.away_set1">{{match.result.away_set1}}<sup
-              *ngIf="match.result.away_tb1">{{match.result.away_tb1}}</sup></span>
-          <span class="score" *ngIf="match.result.away_set2">{{match.result.away_set2}}<sup
-              *ngIf="match.result.away_tb2">{{match.result.away_tb2}}</sup></span>
+          <span class="score">{{match?.result?.away_set1}}<sup>{{match?.result?.away_tb1}}</sup></span>
+          <span class="score">{{match?.result?.away_set2}}<sup>{{match?.result?.away_tb2}}</sup></span>
+          <span class="score">{{match?.result?.away_set3}}<sup>{{match?.result?.away_tb3}}</sup></span>
+          <span class="score">{{match?.result?.away_set4}}<sup>{{match?.result?.away_tb4}}</sup></span>
+          <span class="score">{{match?.result?.away_set5}}<sup>{{match?.result?.away_tb5}}</sup></span>
         </p>
       </mat-card>
     </div>
